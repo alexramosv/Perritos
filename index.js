@@ -1,4 +1,8 @@
-document.querySelector(".add-doggo").addEventListener("click", onClick);
+start ();
+
+function start() {
+  document.querySelector(".add-doggo").addEventListener("click", onClick);
+};
 
 function onClick (_event) {
   const perretes = "https://dog.ceo/api/breeds/image/random";
