@@ -6,14 +6,20 @@ function start() {
 
 function onClick (_event) {
   const perretes = "https://dog.ceo/api/breeds/image/random";
+
   fetch(perretes)
-  .then (function (imagen) {
-    return imagen.json();
-  })
-  .then (function (json) {
-    const img = document.createElement("img");
-    img.alt = "perretes bonitos";
-    img.src = json.message;
-    document.querySelector(".doggos").appendChild(img);
-  })
+  .then (toJason)
+  .then (DonkeyKong)
+};
+
+
+function toJason (imagen) {
+  return imagen.json();
+};
+
+function DonkeyKong (json) {
+  const img = document.createElement("img");
+  img.alt = "perretes bonitos";
+  img.src = json.message;
+  document.querySelector(".doggos").appendChild(img);
 };
