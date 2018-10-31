@@ -25,7 +25,12 @@ function onClickBreeds (_event) {
     label.htmlFor="breed-select";
     label.innerText = "Elige una raza: 👉👉";
     document.querySelector("#breed-container").appendChild(label);
-    
+    const select = document.createElement("select");
+    select.id="breed-select";
+    select.innerText= "👇🐶🎃 Please choose an option below 👇🐶🎃";
+    document.querySelector("#breed-container").appendChild(select);
+
+
   })
   
 };
@@ -42,7 +47,7 @@ function appendImgDom(jsonResponse) {
 /*
 
 <section>
-    <label for="breed-select">Elige una raza: 👉👉</label>
+    <label for="breed-select">Elige una raza: 👉👉</label> ✅✅
     <select id="breed-select">
       <option value="">👇🐶🎃 Please choose an option below 👇🐶🎃</option>
       <option value="schnauzer">Gusy y Nala</option>
