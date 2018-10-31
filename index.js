@@ -25,12 +25,28 @@ function onClickBreeds (_event) {
     label.htmlFor="breed-select";
     label.innerText = "Elige una raza: 👉👉";
     document.querySelector("#breed-container").appendChild(label);
+    
     const select = document.createElement("select");
     select.id="breed-select";
-    select.innerText= "👇🐶🎃 Please choose an option below 👇🐶🎃";
     document.querySelector("#breed-container").appendChild(select);
 
+    const option = document.createElement("option");
+    option.value ="";
+    option.innerText= "👇🐶🎃 Please choose an option below 👇🐶🎃";
+    document.querySelector("#breed-select").appendChild(option);
 
+    console.log(Object.keys(breeds));
+    const razas = Object.keys(breeds);
+    console.log(razas[76])
+
+    const option2 = document.createElement("option");
+    option2.value =razas[76];
+    option2.innerText= razas[76];
+    document.querySelector("#breed-select").appendChild(option2);
+
+
+
+   // objects.keys
   })
   
 };
