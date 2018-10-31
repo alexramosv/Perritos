@@ -21,7 +21,13 @@ function onClickBreeds (_event) {
   .then (toJson)
   .then ( function (jsonResponse) {
     const breeds = jsonResponse.message;
-    console.log(breeds);})
+    const label = document.createElement("label");
+    label.htmlFor="breed-select";
+    label.innerText = "Elige una raza: 👉👉";
+    document.querySelector("#breed-container").appendChild(label);
+    
+  })
+  
 };
   
 function toJson (apiResponse) {
@@ -32,6 +38,21 @@ function appendImgDom(jsonResponse) {
   const img = makeImageFrom(jsonResponse.message);
   document.querySelector(".doggos").appendChild(img);
 }
+
+/*
+
+<section>
+    <label for="breed-select">Elige una raza: 👉👉</label>
+    <select id="breed-select">
+      <option value="">👇🐶🎃 Please choose an option below 👇🐶🎃</option>
+      <option value="schnauzer">Gusy y Nala</option>
+      <option value="cat">Cat</option>
+    </select>
+  </section>
+
+
+*/
+
 
 /*
 function appendListDom(jsonResponse) {
@@ -48,6 +69,7 @@ function makeImageFrom (dogUrl) {
   return image;
  };
 
+ /*
 function makeListFrom (dogsUrl) {
   const lista = document.createElement("list");
   lista.alt = "lista de perretes bonitos";
@@ -56,7 +78,7 @@ function makeListFrom (dogsUrl) {
   return lista;
   
  };
-
+*/
 
 
 
