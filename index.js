@@ -2,6 +2,7 @@ start ();
 
 function start() {
   document.querySelector(".add-doggo").addEventListener("click", onClick);
+  document.querySelector(".listBreeds").addEventListener("click", onClickBreeds);
 };
 
 function onClick (_event) {
@@ -11,16 +12,43 @@ function onClick (_event) {
   .then (toJason)
   .then (appendImgDom)
 };
+
+function onClickBreeds (_event) {
+  const listadoPerretes = "https://dog.ceo/api/breeds/list/all";
+  console.log(listadoPerretes)
+
+  fetch(listadoPerretes)
+  .then (toJason)
+  .then (appendListDom)
+};
   
 function toJason (apiResponse) {
+  console.log(apiResponse.json())
   return apiResponse.json(); 
 };
+
+function appendListDom(jsonResponse2) {
+  const list = makeListFrom(jsonResponse2.message);
+  console.log(list);
+  document.querySelector(".listBreeds").appendChild(list);
+}
+  
+function makeListFrom (dogsUrl) {
+  const lista = document.createElement("list");
+  lista.alt = "lista de perretes bonitos";
+  lista.src = dogsUrl;
+  console.log(lista);
+  return lista;
+  
+ };
 
 function appendImgDom(jsonResponse) {
   const img = makeImageFrom(jsonResponse.message);
   document.querySelector(".doggos").appendChild(img);
 }
-  
+
+
+
 function makeImageFrom (dogUrl) {
   const image = document.createElement("img");
   image.alt = "perretes bonitos";
@@ -29,8 +57,7 @@ function makeImageFrom (dogUrl) {
  };
 
 
-
-
+// list breeds comunicarse cn url de list/all 
 
 
 
