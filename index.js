@@ -9,7 +9,7 @@ function onClick (_event) {
   const perretes = "https://dog.ceo/api/breeds/image/random";
 
   fetch(perretes)
-  .then (toJason)
+  .then (toJson)
   .then (appendImgDom)
 };
 
@@ -18,21 +18,36 @@ function onClickBreeds (_event) {
   console.log(listadoPerretes)
 
   fetch(listadoPerretes)
-  .then (toJason)
-  .then (appendListDom)
+  .then (toJson)
+  .then ( function (jsonResponse) {
+    const breeds = jsonResponse.message;
+    console.log(breeds);})
 };
   
-function toJason (apiResponse) {
-  console.log(apiResponse.json())
+function toJson (apiResponse) {
   return apiResponse.json(); 
 };
 
-function appendListDom(jsonResponse2) {
-  const list = makeListFrom(jsonResponse2.message);
+function appendImgDom(jsonResponse) {
+  const img = makeImageFrom(jsonResponse.message);
+  document.querySelector(".doggos").appendChild(img);
+}
+
+/*
+function appendListDom(jsonResponse) {
+  const list = makeListFrom(jsonResponse.message);
   console.log(list);
   document.querySelector(".listBreeds").appendChild(list);
 }
+*/
   
+function makeImageFrom (dogUrl) {
+  const image = document.createElement("img");
+  image.alt = "perretes bonitos";
+  image.src = dogUrl;
+  return image;
+ };
+
 function makeListFrom (dogsUrl) {
   const lista = document.createElement("list");
   lista.alt = "lista de perretes bonitos";
@@ -42,19 +57,9 @@ function makeListFrom (dogsUrl) {
   
  };
 
-function appendImgDom(jsonResponse) {
-  const img = makeImageFrom(jsonResponse.message);
-  document.querySelector(".doggos").appendChild(img);
-}
 
 
 
-function makeImageFrom (dogUrl) {
-  const image = document.createElement("img");
-  image.alt = "perretes bonitos";
-  image.src = dogUrl;
-  return image;
- };
 
 
 // list breeds comunicarse cn url de list/all 
@@ -74,13 +79,13 @@ function onClick (_event) {
 
 
   fetch(perretes)
-  .then (toJason)
+  .then (toJson)
   .then (monkey)
   .then (DonkeyKong)
 };
 
 
-function toJason (imagen) {
+function toJson (imagen) {
   return imagen.json();
 };
 
@@ -104,7 +109,7 @@ function onClick (_event) {
   const perretes = "https://dog.ceo/api/breeds/image/random";
 
   fetch(perretes)
-  .then (toJason)
+  .then (toJson)
   .then (function (jsonResponse) {
     const img = monkey(jsonResponse.message);
     document.querySelector(".doggos").appendChild(img);
@@ -112,7 +117,7 @@ function onClick (_event) {
 };
 
 
-function toJason (imagen) {
+function toJson (imagen) {
   return imagen.json();
 };
 
