@@ -3,6 +3,7 @@ start ();
 function start() {
   document.querySelector(".add-doggo").addEventListener("click", onClick);
   document.querySelector(".listBreeds").addEventListener("click", onClickBreeds);
+  document.querySelector("#breed-container").addEventListener("change", onChange);
 };
 
 function onClick (_event) {
@@ -15,7 +16,7 @@ function onClick (_event) {
 
 function onClickBreeds (_event) {
   const listadoPerretes = "https://dog.ceo/api/breeds/list/all";
-  console.log(listadoPerretes)
+  //console.log(listadoPerretes)
 
   fetch(listadoPerretes)
   .then (toJson)
@@ -35,22 +36,41 @@ function onClickBreeds (_event) {
     option.innerText= "👇🐶🎃 Please choose an option below 👇🐶🎃";
     document.querySelector("#breed-select").appendChild(option);
 
-    console.log(Object.keys(breeds));
-    const razas = Object.keys(breeds);
-    console.log(razas[76])
-
-    const option2 = document.createElement("option");
-    option2.value =razas[76];
-    option2.innerText= razas[76];
-    document.querySelector("#breed-select").appendChild(option2);
-
-
-
-   // objects.keys
-  })
-  
+    const selectedBreed = Object.keys(breeds);
+    selectedBreed.forEach(function(breed) {
+      const option3 = document.createElement("option");
+      option3.value =breed;
+      option3.innerText= primeraLetraMayuscula(breed.toLowerCase());
+      document.querySelector("#breed-select").appendChild(option3);
+      console.log(breed)
+    });
+  })  
 };
-  
+
+function primeraLetraMayuscula(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+
+
+function onChange (event) {
+  const selectedBreed = event.target.selectedOptions[0].value;
+   const BREED_IMAGES_URL = `https://dog.ceo/api/breed/${selectedBreed}/images`;
+   
+   fetch(BREED_IMAGES_URL)
+     .then(toJson)
+     .then(function(jsonResponse) {
+       const imagesUrl = jsonResponse.message;
+       const sacarFoto = imagesUrl[darNuevaFoto(imagesUrl.length - 1)];
+       const img = makeImageFrom(sacarFoto);
+       document.querySelector(".doggos").appendChild(img);
+     });
+};
+
+function darNuevaFoto(max) {
+  return Math.floor(Math.random() * Math.floor(max));   
+};
+
 function toJson (apiResponse) {
   return apiResponse.json(); 
 };
@@ -60,29 +80,6 @@ function appendImgDom(jsonResponse) {
   document.querySelector(".doggos").appendChild(img);
 }
 
-/*
-
-<section>
-    <label for="breed-select">Elige una raza: 👉👉</label> ✅✅
-    <select id="breed-select">
-      <option value="">👇🐶🎃 Please choose an option below 👇🐶🎃</option>
-      <option value="schnauzer">Gusy y Nala</option>
-      <option value="cat">Cat</option>
-    </select>
-  </section>
-
-
-*/
-
-
-/*
-function appendListDom(jsonResponse) {
-  const list = makeListFrom(jsonResponse.message);
-  console.log(list);
-  document.querySelector(".listBreeds").appendChild(list);
-}
-*/
-  
 function makeImageFrom (dogUrl) {
   const image = document.createElement("img");
   image.alt = "perretes bonitos";
@@ -90,22 +87,21 @@ function makeImageFrom (dogUrl) {
   return image;
  };
 
- /*
-function makeListFrom (dogsUrl) {
-  const lista = document.createElement("list");
-  lista.alt = "lista de perretes bonitos";
-  lista.src = dogsUrl;
-  console.log(lista);
-  return lista;
-  
- };
-*/
 
 
 
 
 
-// list breeds comunicarse cn url de list/all 
+
+
+
+
+
+
+
+
+
+
 
 
 
